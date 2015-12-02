@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LeagueManager.Domain
+﻿namespace LeagueManager.Domain
 {
     public class Vayne : IChampion
     {
 
-        public string Name
-        {
-            get { return "Vayne";  }
-        }
+        public string Name => "Vayne";
 
 
         public string Fight(IChampion champion)
@@ -22,11 +13,8 @@ namespace LeagueManager.Domain
             switch (champion.Name)
             {
                 case "Vayne" : return "Tie";
-                default: return this.Name;
+                default: return Name;
             }
-
-           
-
         }
     }
 }
