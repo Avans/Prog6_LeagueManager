@@ -60,6 +60,10 @@ namespace LeagueManager.WPF.ViewModel
             setup.PlayerName = "Linksonder";
 
             this.GameId = service.SendSetup(setup);
+
+            //Hier waren we gebleven.
+            //Timer is nog null, deze moeten we nog even aanmakenn!
+
             timer.Interval = 2000;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
