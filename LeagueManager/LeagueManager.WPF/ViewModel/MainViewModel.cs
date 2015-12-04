@@ -1,7 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
-using System.Timers;
 using System.Windows.Input;
 
 namespace LeagueManager.WPF.ViewModel
@@ -17,8 +16,6 @@ namespace LeagueManager.WPF.ViewModel
 
         public ICommand SendSetupCommand { get; set; }
         public ICommand NewGameCommannd { get; set; }
-
-        public int GameId { get; set; }
 
         public MainViewModel()
         {
@@ -44,38 +41,9 @@ namespace LeagueManager.WPF.ViewModel
             RaisePropertyChanged("EnemyTeam");
         }
 
-        private LMService.ILMService service;
-        private Timer timer;
-
         private void SendSetup()
         {
-            service = new LMService.LMServiceClient();
-
-            LMService.SetupContract setup = new LMService.SetupContract();
-            setup.Adc = MyTeam.Adc;
-            setup.Jungle = MyTeam.Jungle;
-            setup.Mid = MyTeam.Mid;
-            setup.Supp = MyTeam.Supp;
-            setup.Top = MyTeam.Top;
-            setup.PlayerName = "Linksonder";
-
-            this.GameId = service.SendSetup(setup);
-            timer.Interval = 2000;
-            timer.Elapsed += timer_Elapsed;
-            timer.Start();
+           //Send to service
         }
-
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            var game = service.GetGameResult(this.GameId);
-
-            if (game.Winner != null)
-            {
-                this.Winner = game.Winner.PlayerName;
-                timer.Stop();
-            }
-        }
-
-        public string Winner { get; set; }
     }
 }
